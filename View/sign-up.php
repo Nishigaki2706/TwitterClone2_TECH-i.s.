@@ -1,11 +1,3 @@
-<?php
-
-//設定関連を読み込む
-include_once('../config.php');
-//便利な関数を読み込む
-include_once('../util.php');
-?>
-
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -14,6 +6,7 @@ include_once('../util.php');
     <title>会員登録画面/twitterクローン</title>
     <meta name="description" content="会員登録画面です">
 </head>
+
 <body class="signup text-center">
     <main class="form-signup">
         <form action="sign-up.php" method="post">
@@ -30,4 +23,5 @@ include_once('../util.php');
     </main>  
     <?php include_once('../View/common/foot.php'); ?>
 </body>
+
 </html>
