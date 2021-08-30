@@ -12,14 +12,14 @@ include_once '../Models/users.php';
 
 //登録項目がすべて入力されていれば
 if(isset($_POST['nickname']) && isset($_POST['name'])&& isset($_POST['email']) && isset($_POST['password'])) {
-    $date = [
+    $data = [
         'nickname' => $_POST['nickname'],
         'name' => $_POST['name'],
         'email' => $_POST['email'],
         'password' => $_POST['password'],
     ];
     //ユーザーを作成し、成功すれば
-    if (true) {
+    if (createUser ($data)) {
         //ログイン画面に遷移
         header('Location: ' . HOME_URL . 'Controllers/sign-in.php');
         exit;
