@@ -19,10 +19,10 @@ function buildImagePath(string $name = null, string $type)
 
 /*
 *指定した日時からどれだけ経過したかを取得
-*@param string $datetome 日時
-*@return string
+*  @param string $datetome 日時
+*  @return string
 */
-function convertToDayTimeAgo(string $datetime)
+function convertToDayTimeAgo(string $datetime)//タイプヒンティング
 {
     $unix = strtotime($datetime);
     $now = time();
@@ -41,13 +41,14 @@ function convertToDayTimeAgo(string $datetime)
         $time = $diff_sec / 86400;
         $unix = '日前'; 
     }else{
-        if (date('Y') !=date('Y',$unix)){
+        if (date('Y') !== date('Y',$unix)){//等しくなかったら年月日を出す
             $time = date('Y年n月j日' , $unix);
-        }else{
+        }else{//等しかったら年日を表示
             $time = date('n月j日' , $unix);
         }
         return $time;
     }   
     
     return (int)$time . $unix;
+    //文字列や変数を結合するときは「.(ドット)」を使います。
 }
