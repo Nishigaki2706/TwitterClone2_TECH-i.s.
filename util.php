@@ -19,7 +19,7 @@ function buildImagePath(string $name = null, string $type)
 
 /*
 *指定した日時からどれだけ経過したかを取得
-*  @param string $datetome 日時
+*  @param string $datetime 日時
 *  @return string
 */
 function convertToDayTimeAgo(string $datetime)//タイプヒンティング
@@ -51,4 +51,36 @@ function convertToDayTimeAgo(string $datetime)//タイプヒンティング
     
     return (int)$time . $unix;
     //文字列や変数を結合するときは「.(ドット)」を使います。
+}
+/** 
+*ユーザー情報をセッションに保存
+*
+* @param array $user
+* @return void
+*/
+
+function saveUserSession(array $user){
+    //セッションを開始していない場合
+    if (session_status() === PHP_SESSION_NONE) {
+        //セッション開始
+        session_start();
+    }
+
+    $_SESSION['USER'] = $user;
+}
+/**
+ * ユーザー情報をセッションから削除
+ * 
+ * @return void
+ */
+function deleteUserSession()
+{
+    //セッションを開始していない場合
+    if (session_status() === PHP_SESSION_NONE) {
+        //セッション開始
+        session_start();
+    }
+
+    //セッションのユーザー情報を削除
+    unset($_SESSION['USER']);
 }

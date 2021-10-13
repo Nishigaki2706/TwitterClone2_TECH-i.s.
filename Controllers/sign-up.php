@@ -11,11 +11,8 @@ include_once '../util.php';
 //ユーザーデータ操作モデルを読み込み ユーザーの認証を行うため
 include_once '../Models/users.php';
 
-//ログイン結果 ログイン失敗時にfalesが入る想定
-$try_login_result = null;
-
 //登録項目がすべて入力されていれば
-if(isset($_POST['nickname']) && isset($_POST['name'])&& isset($_POST['email']) && isset($_POST['password'])) {
+if(isset($_POST['nickname']) && isset($_POST['name']) && isset($_POST['email']) && isset($_POST['password'])) {
     $data = [
         'nickname' => $_POST['nickname'],
         'name' => $_POST['name'],
