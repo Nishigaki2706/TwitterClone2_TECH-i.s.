@@ -1,6 +1,6 @@
 <?php
 //////////////////
-///サインインコントローラー
+///ホームコントローラー
 //////////////////
 
 //設定を読み込み
@@ -13,14 +13,12 @@ include_once '../util.php';
 $user = getUserSession();
 if (!$user) {
     //ログイン画面に遷移（ログインしていない）
-    header('Location:' . HOME_URL . 'Controllers/sign-in.php');
+    header('Location: ' . HOME_URL . 'Controllers/sign-in.php');
     exit;
 }
 
-
 //表示用の変数
 $view_user = $user;
-
 //ツイート一覧
 //TODO：モデルから取得する
 $view_tweets = [
@@ -44,7 +42,7 @@ $view_tweets = [
         'tweet_created_at' => '2021-03-14 14:00:00',
         'like_id ' => 1,
         'like_count' => 1,
-    ],
+    ]
 ];
 
 //画面表示

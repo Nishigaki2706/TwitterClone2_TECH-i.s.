@@ -99,7 +99,7 @@ function  getUserSession()
         session_start();
     }
 
-    if(isset($_SESSION['USER'])) {
+    if(!isset($_SESSION['USER'])) {
         //セッションにユーザー情報がない
         return false;
     }
