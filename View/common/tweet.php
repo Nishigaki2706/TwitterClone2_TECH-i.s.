@@ -19,12 +19,13 @@
                             <?php endif;?>    
 
                             <div class="icon-list">
-                                <div class="like js-Like" data-like-id="<?php echo htmlspecialchars($view_tweet['like_id ']);?>">
+                                <div class="like js-Like" data-tweet-id="<?php echo htmlspecialchars($view_tweet['tweet_id']);?>" data-like-id="<?php echo htmlspecialchars($view_tweet['like_id']); ?>">
                                     <?php
-                                    if (isset($view_tweet['like_id '])){
-                                        ///いいねの場合
+                                    if (isset($view_tweet['like_id'])){
+                                        //いいね！の場合
                                         echo '<img src="'.HOME_URL .'/View/img/icon-heart-twitterblue.svg" alt="">';
                                     }else{
+                                        //いいね！していない場合
                                         echo '<img src="'.HOME_URL . '/View/img/icon-heart.svg" alt="">';
                                     }
                                     ?>
