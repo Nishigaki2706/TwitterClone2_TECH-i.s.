@@ -11,11 +11,10 @@
                                     <span class="user-name">@<?php echo htmlspecialchars($view_tweet['user_name']); ?>・<?php echo convertToDayTimeAgo($view_tweet['tweet_created_at']); ?></span>
                                 </a>
                             </div>
-
-                            <p><?php echo htmlspecialchars($view_tweet['tweet_body']); ?></p>
+                            <p><?php echo $view_tweet['tweet_body']; ?></p>
 
                             <?php if(isset($view_tweet['tweet_image_name'])): ?>
-                                <img src="<?php echo buildImagePath ($view_tweet['tweet_image_name'],'tweet');?>" alt="" class="post-image">
+                                <img src="<?php echo buildImagePath ($view_tweet['tweet_image_name'],'tweet'); ?>" alt="" class="post-image">
                             <?php endif;?>    
 
                             <div class="icon-list">
