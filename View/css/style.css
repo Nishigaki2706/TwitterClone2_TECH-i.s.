@@ -23,15 +23,15 @@ html{
 
 @media screen and (max-width:500px){
     .container{
-      padding:0;
+    padding:0;
     }
     .side{
-      width:60px;
+    width:60px;
     }
     .main{
-      width:calc(100% - 60px);
+    width:calc(100% - 60px);
     }
-  }
+}
 
 .nav-link {
     padding: .3rem .3rem;
@@ -78,6 +78,10 @@ a {
     height: 100vh;
     text-align: center;
 }
+
+ul{
+    list-style: none;
+} 
 
 .side .side-inner img {
     width: 35%;

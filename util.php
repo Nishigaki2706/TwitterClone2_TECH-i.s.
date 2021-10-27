@@ -1,6 +1,7 @@
 <?php
-//便利な関数
 ////////////////////
+// 便利な関数
+//////////////////// 
 /*画像ファイル名から画像のURL を生成
 *
 *@param string $name 画像ファイル名
@@ -22,7 +23,7 @@ function buildImagePath(string $name = null, string $type)
 *  @param string $datetime 日時
 *  @return string
 */
-function convertToDayTimeAgo(string $datetime)//タイプヒンティング
+function convertToDayTimeAgo(string $datetime)// タイプヒンティング
 {
     $unix = strtotime($datetime);
     $now = time();
@@ -41,16 +42,16 @@ function convertToDayTimeAgo(string $datetime)//タイプヒンティング
         $time = $diff_sec / 86400;
         $unix = '日前'; 
     }else{
-        if (date('Y') !== date('Y',$unix)){//等しくなかったら年月日を出す
+        if (date('Y') !== date('Y',$unix)){// 等しくなかったら年月日を出す
             $time = date('Y年n月j日' , $unix);
-        }else{//等しかったら年日を表示
+        }else{// 等しかったら年日を表示
             $time = date('n月j日' , $unix);
         }
         return $time;
     }   
     
     return (int)$time . $unix;
-    //文字列や変数を結合するときは「.(ドット)」を使います。
+    // 文字列や変数を結合するときは「.(ドット)」を使います。
 }
 /** 
 *ユーザー情報をセッションに保存
@@ -60,9 +61,9 @@ function convertToDayTimeAgo(string $datetime)//タイプヒンティング
 */
 
 function saveUserSession(array $user){
-    //セッションを開始していない場合
+    // セッションを開始していない場合
     if (session_status() === PHP_SESSION_NONE) {
-        //セッション開始
+        // セッション開始
         session_start();
     }
 
@@ -75,17 +76,17 @@ function saveUserSession(array $user){
  */
 function deleteUserSession()
 {
-    //セッションを開始していない場合
+    // セッションを開始していない場合
     if (session_status() === PHP_SESSION_NONE) {
-        //セッション開始
+        // セッション開始
         session_start();
     }
 
-    //セッションのユーザー情報を削除
+    // セッションのユーザー情報を削除
     unset($_SESSION['USER']);
 }
 
-//各コントローラでログイン状態をチェックするための関数
+// 各コントローラでログイン状態をチェックするための関数
 /** 
  *セッションユーザー情報を取得
  *
@@ -93,20 +94,20 @@ function deleteUserSession()
 */
 function  getUserSession()
 {
-    //セッションを開始していない場合
+    // セッションを開始していない場合
     if (session_status() === PHP_SESSION_NONE) {
-        //セッション開始
+        // セッション開始
         session_start();
     }
 
     if(!isset($_SESSION['USER'])) {
-        //セッションにユーザー情報がない
+        // セッションにユーザー情報がない
         return false;
     }
 
     $user = $_SESSION['USER'];
 
-    //画像のファイル名からファイルのURLを取得
+    // 画像のファイル名からファイルのURLを取得
     if(!isset($user['image_name'])) {
         $user['image_name'] = null;
     }
@@ -124,27 +125,27 @@ function  getUserSession()
  */
 function uploadImage(array $user, array $file, string $type)
 {
-    //画像のファイル名から拡張子を取得（例：.png）
+    // 画像のファイル名から拡張子を取得（例：.png）
     $image_extension = strrchr($file['name'], '.');
 
-    //画像のファイル名を作成（YmdHis: 2021-01-01 00:00:00 ならば 20210101000000）
+    // 画像のファイル名を作成（YmdHis: 2021-01-01 00:00:00 ならば 20210101000000）
     $image_name = $user['id'] . '_' . date('YmdHis') . $image_extension;
 
-    //保存先のディレクトリ
-    $directory = '../View/img_uploaded/' . $type . '/';//$typeにはユーザーかツイートという文字列が入る
+    // 保存先のディレクトリ
+    $directory = '../View/img_uploaded/' . $type . '/';// $typeにはユーザーかツイートという文字列が入る
 
-    //画像のパス
+    // 画像のパス
     $image_path = $directory . $image_name;
 
-    //画像を設置(アップロードされた一次ファイルを指定の場所に移動)
+    // 画像を設置(アップロードされた一次ファイルを指定の場所に移動)
     move_uploaded_file($file['tmp_name'], $image_path);
 
-    //画像ファイルの場合 -> ファイル名をreturn
+    // 画像ファイルの場合 -> ファイル名をreturn
     if (exif_imagetype($image_path)) {
         return $image_name;
     }
 
-    //画像ファイル以外の場合
+    // 画像ファイル以外の場合
     echo '選択されたファイルが画像出ないため処理を停止しました。';
     exit;
 }

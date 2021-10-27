@@ -12,14 +12,15 @@
             <div class="main-header">
                 <h1>つぶやく</h1>
             </div>
+
             <div class="tweet-post">
                 <div class="my-icon">
-                    <img src="<?php echo htmlspecialchars($view_user['image_path']) ?>" alt="" class="">
+                    <img src="<?php echo htmlspecialchars($view_user['image_path']); ?>" alt="">
                 </div>
                 <div class="input-area">
                     <form action="post.php" method="post" enctype="multipart/form-data">
                         <textarea name="body" placeholder="今どうしてる？" maxlength="140"></textarea>
-                        <div class="bottom-area"></div>
+                        <div class="bottom-area">
                             <div class="mb-o">
                                 <input type="file" name="image" class="form-control form-control-sm">
                             </div>

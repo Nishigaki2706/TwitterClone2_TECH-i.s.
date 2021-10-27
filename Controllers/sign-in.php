@@ -12,7 +12,7 @@ include_once '../util.php';
 //ユーザーデータ操作モデルを読み込み
 include_once '../Models/users.php';
 
-//ログイン結果 ログイン失敗時にfalesが入る想定
+//ログイン結果 ログイン失敗時にfalseが入る想定
 $try_login_result = null;
 
 //メールアドレスとパスワードが入力されている場合
