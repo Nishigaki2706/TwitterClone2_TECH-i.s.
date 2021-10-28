@@ -12,6 +12,12 @@ include_once '../util.php';
 //いいね！データ操作モデルを読み込み
 include_once '../Models/likes.php';
 
+// 通知データ操作モデルを読み込み
+include_once '../Models/notifications.php';
+
+// 通知データ操作モデルを読み込み
+include_once '../Models/tweets.php';
+
 // ---------------------------------
 // ログインチェック
 // ---------------------------------
@@ -35,6 +41,18 @@ if (isset($_POST['tweet_id'])) {
     ];
     // いいね！登録
     $like_id = createLike($data);
+
+    // ツイートを取得
+    $tweet = findTweet($_POST['tweet_id']);
+    if ($tweet) {
+        // 通知を登録
+        $data_notification = [
+            'received_user_id' => $_POST['followed_user_id'],
+            'sent_user_id' => $user['id'],
+            'message' => 'フォローされました。',
+        ];
+        createNotification($data_notification);
+    }
 }
 
 // --------------------------------
