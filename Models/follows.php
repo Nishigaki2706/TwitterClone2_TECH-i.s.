@@ -57,11 +57,11 @@ function createFollow(array $data)
  */
 function deleteFollow(array $data)
 {
-        // DB接続
-        $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-        if ($mysqli->connect_errno) {
-            echo 'MySQLの接続に失敗しました。：' . $mysqli->connect_error . "\n";
-            exit;
+    // DB接続
+    $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+    if ($mysqli->connect_errno) {
+        echo 'MySQLの接続に失敗しました。：' . $mysqli->connect_error . "\n";
+        exit;
     }
 
     // 更新日時を追加
@@ -95,4 +95,60 @@ function deleteFollow(array $data)
     $mysqli->close();
 
     return $response;
+}
+
+/**
+ * 
+ *  自分がフォローしているユーザーＩＤ一覧を取得
+ * 
+ *  @param int $follow_user_id
+ *  @return array|false
+ */
+function findFollowingUserIds(int $follow_user_id)
+{
+    // DB接続
+    $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+    if ($mysqli->connect_errno) {
+        echo 'MySQLの接続に失敗しました。：' . $mysqli->connect_error . "\n";
+        exit;
+    }
+
+    // エスケープ
+    $follow_user_id = $mysqli->real_escape_string($follow_user_id);
+
+    // ----------------------------
+    // SQLクエリを作成
+    // ----------------------------
+    $query = 'SELECT followed_user_id FROM follows'
+        . ' WHERE status = "active" AND follow_user_id ="' . $follow_user_id . '"';
+
+    // ---------------------------
+    // 戻り値を作成
+    // ---------------------------
+    $result = $mysqli->query($query);
+
+    // SQLエラーの場合->エラー表示
+    if (!$result) {
+        echo 'エラーメッセージ： ' . $mysqli->error . "\n";
+        // DB接続を開放
+        $mysqli->close();
+        return false;
+    }
+
+    // フォロー一覧を取得
+    $follows = $result->fetch_all(MYSQLI_ASSOC);
+
+    // ユーザーＩＤの一覧を作成
+    $following_user_ids = [];
+    foreach ($follows as $follow) {
+        $following_user_ids[] = $follow['followed_user_id'];
+    } 
+
+    // ---------------------------- 
+    // 処理後
+    // ---------------------------- 
+    // DB接続を解放
+    $mysqli->close();
+
+    return $following_user_ids;
 }
